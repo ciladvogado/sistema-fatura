@@ -125,7 +125,8 @@ const config: NextAuthConfig = {
       }
     },
 
-    async signOut({ token }) {
+    async signOut(message) {
+      const token = "token" in message ? message.token : null
       if (token?.sub) {
         const user = await prisma.user.findUnique({
           where: { id: token.sub },
